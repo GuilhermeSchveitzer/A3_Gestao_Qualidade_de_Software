@@ -1,4 +1,4 @@
-*💻 Projeto de Empréstimo de Ferramentas – Java (1ª Fase)*
+**💻 Projeto de Empréstimo de Ferramentas – Java (1ª Fase)**
 Este repositório contém um projeto desenvolvido na primeira fase do curso de graduação, cujo objetivo é gerenciar o empréstimo de ferramentas. A aplicação foi construída com Java, utilizando NetBeans como IDE e SQLite3 como banco de dados. O projeto está sendo evoluído para aplicar conceitos de Clean Code e testes automatizados com JUnit.
 
 *📌 Objetivos do Projeto*

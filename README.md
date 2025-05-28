@@ -16,7 +16,6 @@ Este repositório contém um projeto desenvolvido na primeira fase do curso de g
 ## 👥 Alunos / Desenvolvedores
 
   Bernardo Santos Vieira - RA: 1072415392 - GitHub: <a href="https://github.com/BernardoSVieira">bernardosvieira</a><br>
-  Eduardo Alfredo Coelho - RA: 1072419300 - GitHub: <a href="https://github.com/Eduardocoelh0">eduardocoelh0</a><br>
   Guilherme Schveitzer - RA: 1072415715 - GitHub: <a href="https://github.com/GuilhermeSchveitzer">guilhermeSchveitzer</a> - PC Gamer<br>
   Victor Hasse - RA: 10724111755 - GitHub: <a href="https://github.com/victorhasse">victorhasse</a><br>
   Igor Vinicius Sotile Mirandolli - RA: 1072416369 - GitHub: <a href="https://github.com/IgorMirandolli">igormirandolli</a><br>

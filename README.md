@@ -4,7 +4,7 @@ Este repositório contém um projeto desenvolvido na primeira fase do curso de g
 
 ---
 
-# 📌 Objetivos do Projeto
+## 📌 Objetivos do Projeto
 
 - Criar um sistema simples para **cadastro de amigos** e **ferramentas**.
 - Realizar o **controle de empréstimos** dessas ferramentas.
@@ -13,7 +13,17 @@ Este repositório contém um projeto desenvolvido na primeira fase do curso de g
 
 ---
 
-# 🧱 Estrutura Inicial
+## 👥 Alunos / Desenvolvedores
+
+  Bernardo Santos Vieira - RA: 1072415392 - GitHub: <a href="https://github.com/BernardoSVieira">bernardosvieira</a><br>
+  Eduardo Alfredo Coelho - RA: 1072419300 - GitHub: <a href="https://github.com/Eduardocoelh0">eduardocoelh0</a><br>
+  Guilherme Schveitzer - RA: 1072415715 - GitHub: <a href="https://github.com/GuilhermeSchveitzer">guilhermeSchveitzer</a> - PC Gamer<br>
+  Victor Hasse - RA: 10724111755 - GitHub: <a href="https://github.com/victorhasse">victorhasse</a><br>
+  Igor Vinicius Sotile Mirandolli - RA: 1072416369 - GitHub: <a href="https://github.com/IgorMirandolli">igormirandolli</a><br>
+
+---
+
+## 🧱 Estrutura Inicial
 
 O sistema conta com as seguintes classes principais:
 
@@ -24,7 +34,7 @@ O sistema conta com as seguintes classes principais:
 
 ---
 
-# 🚀 Tecnologias Utilizadas
+## 🚀 Tecnologias Utilizadas
 
 - [Java](https://www.oracle.com/java/)
 - [NetBeans](https://netbeans.apache.org/)
@@ -35,7 +45,7 @@ O sistema conta com as seguintes classes principais:
 
 ---
 
-# 🧼 Melhorias em Andamento
+## 🧼 Melhorias em Andamento
 
 Este projeto está passando por uma refatoração com os seguintes focos:
 
@@ -46,7 +56,7 @@ Este projeto está passando por uma refatoração com os seguintes focos:
 
 ---
 
-# 🧪 Testes
+## 🧪 Testes
 
 Estamos implementando testes unitários com **JUnit 5**, buscando alcançar pelo menos **50% de cobertura de código**.  
 Os testes serão automatizados via **GitHub Actions**, garantindo que a qualidade seja mantida a cada commit.

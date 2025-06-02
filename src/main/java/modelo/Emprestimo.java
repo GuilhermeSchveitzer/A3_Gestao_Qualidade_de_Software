@@ -11,19 +11,19 @@ public class Emprestimo {
 
     private int idAmigo;
     private int idFerramenta;
-    private java.sql.Date dataEmprestimo;
-    private java.sql.Date dataDevolucao;
+    private String dataEmprestimo;
+    private String dataDevolucao;
     private boolean pendente;
     private Ferramenta ferramenta;
     private Amigo amigo;
     public EmprestimoDAO dao; // instanciando a classe emprestimoDAO para ter acesso aos seus métodos.
     
     public Emprestimo() {
-        this(0, 0, 0, new java.sql.Date(new Date().getTime()), null, true, null, null);
+        this(0, 0, 0, "", null, true, null, null);
     }
     
     //Construtor sem os objetos Amigo e Ferramenta como recomendado pelo professor. Por favor não apagar de novo
-    public Emprestimo(int idEmprestimo, int idAmigo, int idFerramenta, java.sql.Date dataEmprestimo, java.sql.Date dataDevolucao, boolean pendente) {
+    public Emprestimo(int idEmprestimo, int idAmigo, int idFerramenta, String dataEmprestimo, String dataDevolucao, boolean pendente) {
         this.idEmprestimo = idEmprestimo;
         this.idAmigo = idAmigo;
         this.idFerramenta = idFerramenta;
@@ -35,7 +35,7 @@ public class Emprestimo {
         this.dao = new EmprestimoDAO();
     }
 
-    public Emprestimo(int idEmprestimo, int idAmigo, int idFerramenta, java.sql.Date dataEmprestimo, java.sql.Date dataDevolucao, boolean pendente, Ferramenta ferramenta, Amigo amigo) {
+    public Emprestimo(int idEmprestimo, int idAmigo, int idFerramenta, String dataEmprestimo, String dataDevolucao, boolean pendente, Ferramenta ferramenta, Amigo amigo) {
         this.idEmprestimo = idEmprestimo;
         this.idAmigo = idAmigo;
         this.idFerramenta = idFerramenta;
@@ -72,19 +72,19 @@ public class Emprestimo {
         this.idFerramenta = idFerramenta;
     }
 
-    public Date getDataEmprestimo() {
+    public String getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(java.sql.Date dataEmprestimo) {
+    public void setDataEmprestimo(String dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public Date getDataDevolucao() {
+    public String getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(java.sql.Date dataDevolucao) {
+    public void setDataDevolucao(String dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
@@ -135,7 +135,7 @@ public class Emprestimo {
     }
     
      // insere empréstimo
-    public boolean inserirEmprestimoBD(int id, int idAmigo, int idFerramenta, java.sql.Date dataEmprestimo, boolean pendente, Ferramenta ferramenta, Amigo amigo) {
+    public boolean inserirEmprestimoBD(int id, int idAmigo, int idFerramenta, String dataEmprestimo, boolean pendente, Ferramenta ferramenta, Amigo amigo) {
         id = dao.maiorID() + 1;
         Emprestimo objeto = new Emprestimo(id, idAmigo, idFerramenta, dataEmprestimo, dataDevolucao, pendente, ferramenta, amigo);
         dao.inserirEmprestimoBD(objeto);
@@ -149,7 +149,7 @@ public class Emprestimo {
     }
     
     // alterando algum empréstimo existente
-    public boolean atualizarEmprestimoBD(int id, int idAmigo, int idFerramenta, java.sql.Date dataEmprestimo, java.sql.Date dataDevolucao, boolean pendente) {
+    public boolean atualizarEmprestimoBD(int id, int idAmigo, int idFerramenta, String dataEmprestimo, String dataDevolucao, boolean pendente) {
         Emprestimo objeto = new Emprestimo(id, idAmigo, idFerramenta,dataEmprestimo, dataDevolucao, pendente, ferramenta, amigo);
         dao.atualizarEmprestimoBD(objeto);
         return true;

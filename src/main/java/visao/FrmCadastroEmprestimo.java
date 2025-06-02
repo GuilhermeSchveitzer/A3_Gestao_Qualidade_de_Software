@@ -181,7 +181,7 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
                 int confirmEmprestimo = JOptionPane.showConfirmDialog(null, "O amigo " + amigoEscolhido.getNomeAmigo() + " já possui um empréstimo ativo. Deseja conceder mesmo assim?");
                 // condicional para ver se o usuário quer emprestar mesmo com o amigo ainda tendo pendencias e checando se a ferramenta está disponível
                 if (confirmEmprestimo == 0 && verificaDisponibilidade(ferramentaEscolhida.getIdFerramenta())) {
-                    this.objetoEmprestimo.inserirEmprestimoBD(idEmprestimo, amigoEscolhido.getIdAmigo(), ferramentaEscolhida.getIdFerramenta(), sqlDate, true,
+                    this.objetoEmprestimo.inserirEmprestimoBD(idEmprestimo, amigoEscolhido.getIdAmigo(), ferramentaEscolhida.getIdFerramenta(), "", true,
                             ferramentaEscolhida, amigoEscolhido);
 
                     // mostrando mensagem confirmando que o empréstimo foi cadastrado, para quem e quando
@@ -203,7 +203,7 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ferramenta " + ferramentaEscolhida.getNomeFerramenta() + " indisponível, escolha outra!");
                 sair = true;
             } else {
-                if (this.objetoEmprestimo.inserirEmprestimoBD(idEmprestimo, amigoEscolhido.getIdAmigo(), ferramentaEscolhida.getIdFerramenta(), sqlDate, true,
+                if (this.objetoEmprestimo.inserirEmprestimoBD(idEmprestimo, amigoEscolhido.getIdAmigo(), ferramentaEscolhida.getIdFerramenta(), "", true,
                         ferramentaEscolhida, amigoEscolhido)) {
                     // mostrando mensagem confirmando que o empréstimo foi cadastrado, para quem e quando
                     JOptionPane.showMessageDialog(null, amigoEscolhido.getNomeAmigo() + " Pegou um(a) "

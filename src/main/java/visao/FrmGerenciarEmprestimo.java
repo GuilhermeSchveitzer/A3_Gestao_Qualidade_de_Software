@@ -123,9 +123,9 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
             int id = 0;
             int idAmigo = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 3).toString());
             int idFerramenta = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 4).toString());
-            java.sql.Date dataEmprestimo = (java.sql.Date) objetoEmprestimo.carregaEmprestimoPorId(id).getDataEmprestimo();
-            
-            java.sql.Date dataDevolucao = new java.sql.Date(new Date().getTime());// data no formato SQL
+            String dataEmprestimo = objetoEmprestimo.carregaEmprestimoPorId(id).getDataEmprestimo();
+
+            String dataDevolucao = "";
 
             // caso não tenha selecionado nenhuma linha
             

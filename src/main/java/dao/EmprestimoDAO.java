@@ -30,8 +30,8 @@ public class EmprestimoDAO {
                 int idEmprestimo = res.getInt("idEmprestimo");
                 int idAmigo = res.getInt("idAmigo");
                 int idFerramenta = res.getInt("idFerramenta");
-                java.sql.Date dataEmprestimo = res.getDate("dataEmprestimo");
-                java.sql.Date dataDevolucao = res.getDate("dataDevolucao");
+                String dataEmprestimo = res.getString("dataEmprestimo");
+                String dataDevolucao = res.getString("dataDevolucao");
                 boolean pendente = res.getBoolean("pendente");
 
                 Emprestimo objeto = new Emprestimo(idEmprestimo, idAmigo, idFerramenta, dataEmprestimo, dataDevolucao, pendente);
@@ -63,8 +63,8 @@ public class EmprestimoDAO {
 
             objeto.setIdAmigo(res.getInt("idAmigo"));
             objeto.setIdFerramenta(res.getInt("idFerramenta"));
-            objeto.setDataEmprestimo(res.getDate("dataEmprestimo"));
-            objeto.setDataDevolucao(res.getDate("dataDevolucao"));
+            objeto.setDataEmprestimo(res.getString("dataEmprestimo"));
+            objeto.setDataDevolucao(res.getString("dataDevolucao"));
             objeto.setPendente(res.getBoolean("pendente"));
 
             stmt.close();
@@ -89,8 +89,8 @@ public class EmprestimoDAO {
             stmt.setInt(1, objeto.getIdEmprestimo());
             stmt.setInt(2, objeto.getIdAmigo());
             stmt.setInt(3, objeto.getIdFerramenta());
-            stmt.setDate(4, (java.sql.Date) objeto.getDataEmprestimo());
-            stmt.setDate(5, (java.sql.Date) objeto.getDataDevolucao());
+            stmt.setString(4, objeto.getDataEmprestimo());
+            stmt.setString(5, objeto.getDataDevolucao());
             stmt.setBoolean(6, objeto.getPendente());
 
             stmt.execute();
@@ -147,8 +147,8 @@ public class EmprestimoDAO {
             
             stmt.setInt(1, objeto.getIdAmigo());
             stmt.setInt(2, objeto.getIdFerramenta());
-            stmt.setDate(3,(java.sql.Date) objeto.getDataEmprestimo());
-            stmt.setDate(4,(java.sql.Date) objeto.getDataDevolucao());
+            stmt.setString(3, objeto.getDataEmprestimo());
+            stmt.setString(4, objeto.getDataDevolucao());
             stmt.setBoolean(5, objeto.getPendente());
             stmt.setInt(6, objeto.getIdEmprestimo());
             stmt.execute(); // Executando a operação

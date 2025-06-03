@@ -44,6 +44,16 @@ O sistema conta com as seguintes classes principais:
 
 ---
 
+## ✨ Versão das Tecnologias
+
+JaCoCo 0.8.8.
+JUnit 5.9.0.
+Java 21
+SQLite 3.49.2
+
+
+---
+
 ## 🧼 Melhorias em Andamento
 
 Este projeto está passando por uma refatoração com os seguintes focos:

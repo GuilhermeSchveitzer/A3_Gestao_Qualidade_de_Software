@@ -35,22 +35,13 @@ O sistema conta com as seguintes classes principais:
 
 ## 🚀 Tecnologias Utilizadas
 
-- [Java](https://www.oracle.com/java/)
+- [Java](https://www.oracle.com/java/) - Versão: 21
 - [NetBeans](https://netbeans.apache.org/)
-- [SQLite3](https://www.sqlite.org/index.html)
+- [SQLite3](https://www.sqlite.org/index.html) - Versão: 3.49.2
 - [Maven](https://maven.apache.org/)
-- [JUnit](https://junit.org/)
+- [JUnit](https://junit.org/) - Versão: 5.9.0.
 - [GitHub Actions](https://github.com/features/actions)
-
----
-
-## ✨ Versão das Tecnologias
-
-- JaCoCo 0.8.8.
-- JUnit 5.9.0.
-- Java 21
-- SQLite 3.49.2
-
+- JaCoCo  Versão: 0.8.8.
 
 ---
 

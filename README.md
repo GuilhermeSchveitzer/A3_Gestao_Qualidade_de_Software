@@ -1,6 +1,7 @@
-[![Github Actions Status for GuilhermeSchveitzer/A3_Gestao_Qualidade_de_Software](https://github.com/GuilhermeSchveitzer/A3_Gestao_Qualidade_de_Software/workflows/Integra%C3%A7%C3%A3o%20continua%20de%20Java%20com%20Maven/badge.svg)](https://github.com/GuilhermeSchveitzer/A3_Gestao_Qualidade_de_Software/actions) 
+[![Github Actions Status for GuilhermeSchveitzer/A3_Gestao_Qualidade_de_Software](https://github.com/GuilhermeSchveitzer/A3_Gestao_Qualidade_de_Software/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/GuilhermeSchveitzer/A3_Gestao_Qualidade_de_Software/actions) 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software&metric=coverage)](https://sonarcloud.io/component_measures?id=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software&metric=coverage)
+
 
 # 💻 Projeto de Empréstimo de Ferramentas – Java (1ª Fase)
 

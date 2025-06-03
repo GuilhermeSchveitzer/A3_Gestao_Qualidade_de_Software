@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com</groupId>
-    <artifactId>cadastrocliente_desktop5_base</artifactId>
+    <artifactId>A3_Gestao_Qualidade_de_Software</artifactId>
     <version>1</version>
     <packaging>jar</packaging>
-    <name>cadastrocliente_desktop5_base</name>
+    <name>A3_Gestao_Qualidade_de_Software</name>
     
     <dependencies>
         <dependency>

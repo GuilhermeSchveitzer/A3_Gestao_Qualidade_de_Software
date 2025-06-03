@@ -171,7 +171,5 @@ public class AmigoDAO {
 
         return false; // Não possui empréstimo pendente
     }
-
-  
 }
 

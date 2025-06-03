@@ -15,10 +15,10 @@ public class TestAmigo {
 
     @Test
     public void testConstrutorComParametros() {
-        Amigo amigo = new Amigo(1, "João", "123456789");
+        Amigo amigo = new Amigo(1, "João", "12345678910");
         assertEquals(1, amigo.getIdAmigo());
         assertEquals("João", amigo.getNomeAmigo());
-        assertEquals("123456789", amigo.getTelefone());
+        assertEquals("12345678910", amigo.getTelefone());
     }
 
     @Test

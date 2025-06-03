@@ -1,71 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.mycompany</groupId>
-    <artifactId>A3_Gestao_Qualidade_de_Software</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>com</groupId>
+    <artifactId>cadastrocliente_desktop5_base</artifactId>
+    <version>1</version>
     <packaging>jar</packaging>
-    <name>A3-GQS</name>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <exec.mainClass>com.mycompany.A3_Gestao_Qualidade_de_Software.A3_Gestao_Qualidade_de_Software</exec.mainClass>
-
-        <!-- SonarCloud Config -->
-        <sonar.organization>guilhermeschveitzer</sonar.organization>
-        <sonar.projectKey>com.mycompany:A3_Gestao_Qualidade_de_Software</sonar.projectKey>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    </properties>
-
+    <name>cadastrocliente_desktop5_base</name>
+    
     <dependencies>
-        <!-- SQLite JDBC -->
-        <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.49.1.0</version>
-        </dependency>
-
-        <!-- JUnit 5 (Jupiter API) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.0</version>
+            <version>5.9.0-M1</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- JUnit Jupiter Engine -->
+            <type>jar</type>
+        </dependency>  
+           
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.0</version>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>1.9.0-M1</version>
             <scope>test</scope>
+            <type>jar</type>
         </dependency>
-
-        <!-- JUnit Params (para testes parametrizados) -->
+        
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.9.0</version>
+            <version>5.9.0-M1</version>
             <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.36.0.3</version>
         </dependency>
     </dependencies>
-
+    
+    <properties>        
+        <sonar.organization>igormirandolli</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.exclusions>**/*Principal.*,dao.SQLiteDadosBanco,dao.cliente.SQLiteClienteMetaDados</sonar.coverage.exclusions> 
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    
     <build>
         <plugins>
-            <!-- JaCoCo para cobertura de testes -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>
+                                        Principal
+                                    </mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.8</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/principal/*Principal.*</exclude>
+                <configuration>                    
+                    <excludes>                        
+                        <exclude>**/*Principal.*</exclude>
+                        <exclude>dao.SQLiteDadosBanco</exclude>
+                        <exclude>dao.cliente.SQLiteClienteMetaDados</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -83,15 +101,12 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-
-            <!-- Sonar Scanner para anÃ¡lise com SonarCloud -->
+            </plugin>  
+            
             <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.10.0.2594</version>
-            </plugin>
-        </plugins>
-    </build>
-
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M6</version>
+            </plugin>   
+        </plugins>        
+    </build>    
 </project>

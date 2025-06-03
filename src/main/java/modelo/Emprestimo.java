@@ -6,8 +6,7 @@ import java.util.Date;
 
 
 public class Emprestimo {
-
-    private int idEmprestimo;
+  private int idEmprestimo;
 
     private int idAmigo;
     private int idFerramenta;
@@ -156,3 +155,4 @@ public class Emprestimo {
     }
     
 }
+  

@@ -250,6 +250,15 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CBAmigoActionPerformed
 
+    // Métodos auxiliares para testes
+    public void setObjetoAmigo(Amigo amigo) {
+        this.objetoAmigo = amigo;
+    }
+
+    public void setObjetoFerramenta(Ferramenta ferramenta) {
+        this.objetoFerramenta = ferramenta;
+    }
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -259,7 +268,7 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CBAmigo;
+    javax.swing.JComboBox<String> CBAmigo;
     private javax.swing.JComboBox<String> CBFerramenta;
     private javax.swing.JButton JBPegar;
     private javax.swing.JButton JBVoltar;

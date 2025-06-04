@@ -3,6 +3,7 @@ package visao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.awt.GraphicsEnvironment;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -14,6 +15,11 @@ public class TestFrmCadastroEmprestimo {
 
     @Test
     public void testCarregaCBAmigoComUmAmigo() {
+        // Ativa modo headless só se não houver display (ex: em GitHub Actions)
+        if (GraphicsEnvironment.isHeadless()) {
+            System.setProperty("java.awt.headless", "true");
+        }
+
         // Cria um amigo fake
         Amigo amigo = new Amigo();
         amigo.setIdAmigo(1);

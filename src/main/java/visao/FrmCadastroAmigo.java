@@ -173,4 +173,17 @@ public class FrmCadastroAmigo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+    
+    
+    public String validarCampos(String nome, String telefone) {
+        if (nome.length() < 3) {
+            return "O nome deve ter ao menos 3 caracteres";
+        }
+
+        if (telefone.length() < 11) {
+            return "O número de telefone precisa de ao menos 11 números";
+        }
+
+        return "OK";
+    }
 }

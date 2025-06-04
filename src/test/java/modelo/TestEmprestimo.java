@@ -4,6 +4,8 @@ import modelo.Ferramenta;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmprestimoTest {
@@ -53,5 +55,50 @@ class EmprestimoTest {
         Ferramenta f = new Ferramenta();
         e.setFerramenta(f);
         assertEquals(f, e.getFerramenta());
+    }
+
+    @Test
+    void testMaiorId() {
+        Emprestimo e = new Emprestimo();
+        int maior = e.maiorID();
+        assertTrue(maior >= 0);
+    }
+
+    @Test
+    void testInsertUpdateDeleteEmprestimoBD() {
+        Emprestimo e = new Emprestimo();
+        int novoId = e.maiorID() + 1;
+
+        boolean inserido = e.inserirEmprestimoBD(novoId, 1, 1, "2025-06-04", true, new Ferramenta(), new Amigo());
+        assertTrue(inserido, "Falha ao inserir");
+
+        Emprestimo buscado = e.carregaEmprestimoPorId(novoId);
+        assertEquals(novoId, buscado.getIdEmprestimo());
+
+        boolean atualizado = e.atualizarEmprestimoBD(novoId, 1, 1, "2025-06-04", "2025-06-10", false);
+        assertTrue(atualizado, "Falha ao atualizar");
+
+        Emprestimo atualizadoObj = e.carregaEmprestimoPorId(novoId);
+        assertEquals("2025-06-10", atualizadoObj.getDataDevolucao());
+        assertFalse(atualizadoObj.getPendente());
+
+        boolean deletado = e.deletarEmprestimoBD(novoId);
+        assertTrue(deletado, "Falha ao deletar");
+    }
+
+    @Test
+    void testGetMinhaLista() {
+        Emprestimo e = new Emprestimo();
+        ArrayList<Emprestimo> lista = e.getMinhaLista();
+        assertNotNull(lista);
+        // Opcional: assertFalse(lista.isEmpty());
+    }
+
+    @Test
+    void testCarregaEmprestimoPorIdComDadoExistente() {
+        Emprestimo e = new Emprestimo();
+        int idExistente = e.maiorID(); // usando último ID existente
+        Emprestimo buscado = e.carregaEmprestimoPorId(idExistente);
+        assertEquals(idExistente, buscado.getIdEmprestimo());
     }
 }

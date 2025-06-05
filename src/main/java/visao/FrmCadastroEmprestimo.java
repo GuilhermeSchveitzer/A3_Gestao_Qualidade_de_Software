@@ -272,14 +272,6 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
-// Fora da seção de código gerado (não mexa no //GEN-BEGIN:initComponents)
-
-// Adicione esses métodos na sua classe FrmCadastroEmprestimo:
-
-    public JTextPane getJTFData() { return JTFData; }
-    public JComboBox<String> getCBAmigo() { return CBAmigo; }
-    public JComboBox<String> getCBFerramenta() { return CBFerramenta; }
-    public JButton getJBVoltar() { return JBVoltar; }
 }
 
 

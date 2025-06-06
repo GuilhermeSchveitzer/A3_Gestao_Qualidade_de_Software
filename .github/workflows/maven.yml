@@ -35,7 +35,7 @@ jobs:
       - name: Build and analyze (DEV)
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
+        run: xvfb-run -a mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
              -Dsonar.projectKey=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software
              -Dsonar.branch.name=dev
 
@@ -67,7 +67,7 @@ jobs:
       - name: Build and analyze (HMG)
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
+        run: xvfb-run -a mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
              -Dsonar.projectKey=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software
              -Dsonar.branch.name=hmg
 
@@ -99,6 +99,6 @@ jobs:
       - name: Build and analyze (BRD)
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
+        run: xvfb-run -a mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
              -Dsonar.projectKey=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software
              -Dsonar.branch.name=brd

@@ -3,6 +3,7 @@ package visao;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Emprestimo;
 
@@ -10,6 +11,10 @@ import modelo.Emprestimo;
 public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
 
     private Emprestimo objetoEmprestimo;
+    
+    public void mostrarMensagem(String mensagem) {
+    JOptionPane.showMessageDialog(this, mensagem);
+}
 
     public FrmGerenciarEmprestimo() {
         initComponents();
@@ -18,9 +23,11 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
         this.carregaTabela();
     }
     
-    public void mostrarMensagem(String mensagem) {
-    JOptionPane.showMessageDialog(this, mensagem);
+    public int confirmarMensagem(String mensagem) {
+    return JOptionPane.showConfirmDialog(this, mensagem);
 }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -121,44 +128,39 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBDevolucaoActionPerformed
-        try {
-            // validando dados da interface gráfica.
-            // inicializando as variáveis
-            int id = 0;
-            int idAmigo = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 3).toString());
-            int idFerramenta = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 4).toString());
-            String dataEmprestimo = objetoEmprestimo.carregaEmprestimoPorId(id).getDataEmprestimo();
-
-            String dataDevolucao = "";
-
-            // caso não tenha selecionado nenhuma linha
-            
-            if (this.jTable.getSelectedRow() == -1) {
-                throw new Mensagem("Primeiro Selecione um empréstimo para DEVOLVER");
-            } else {
-                id = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 2).toString());
-            }
-
-
-            // retorna 0 -> primeiro botão | 1 -> segundo botão | 2 -> terceiro botão
-            int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar a devolução do empréstimo?");
-
-            if (respostaUsuario == 0) {// clicou em SIM
-                // envia os dados para o objeto emprestimo processar
-
-                if (this.objetoEmprestimo.atualizarEmprestimoBD(id, idAmigo, idFerramenta, dataEmprestimo, dataDevolucao, false)) {
-
-                    mostrarMensagem("O amigo " + objetoEmprestimo.getAmigo().carregaAmigoPorId(idAmigo).getNomeAmigo() + " devolveu a ferramenta chamada " + objetoEmprestimo.getFerramenta().carregaFerramentaPorId(idFerramenta).getNomeFerramenta());
-                }
-            }
-            // atualiza a tabela.
-            System.out.println(this.objetoEmprestimo.getMinhaLista().toString());
-        } catch (Mensagem erro) {
-            mostrarMensagem(erro.getMessage());
-        } finally {
-            // atualiza a tabela.
-            carregaTabela();
+       
+    try {
+        // caso não tenha selecionado nenhuma linha
+        if (this.jTable.getSelectedRow() == -1) {
+            throw new Mensagem("Primeiro Selecione um empréstimo para DEVOLVER");
         }
+
+        // validando dados da interface gráfica.
+        int id = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 2).toString());
+        int idAmigo = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 3).toString());
+        int idFerramenta = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 4).toString());
+        String dataEmprestimo = objetoEmprestimo.carregaEmprestimoPorId(id).getDataEmprestimo();
+
+        String dataDevolucao = "";
+
+        int respostaUsuario = confirmarMensagem("Tem certeza que deseja realizar a devolução do empréstimo?");
+        if (respostaUsuario == 0) {
+            if (this.objetoEmprestimo.atualizarEmprestimoBD(id, idAmigo, idFerramenta, dataEmprestimo, dataDevolucao, false)) {
+                mostrarMensagem("O amigo " +
+                        objetoEmprestimo.getAmigo().carregaAmigoPorId(idAmigo).getNomeAmigo() +
+                        " devolveu a ferramenta chamada " +
+                        objetoEmprestimo.getFerramenta().carregaFerramentaPorId(idFerramenta).getNomeFerramenta());
+            }
+        }
+        System.out.println(this.objetoEmprestimo.getMinhaLista().toString());
+
+    } catch (Mensagem erro) {
+        mostrarMensagem(erro.getMessage());
+    } finally {
+        carregaTabela();
+    }
+
+
     }//GEN-LAST:event_JBDevolucaoActionPerformed
 
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
@@ -188,9 +190,7 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
             
         }
     }
-    public javax.swing.JTable getTabelaEmprestimos() {
-    return this.jTable;
-}
+  
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -223,6 +223,14 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
             }
         });
     }
+    
+    public JTable getTabelaEmprestimos() {
+    return jTable;
+}
+    
+    public javax.swing.JButton getBotaoDevolucao() {
+    return JBDevolucao;
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBDevolucao;

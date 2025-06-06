@@ -18,7 +18,7 @@ public class FrmGerenciarEmprestimoTest {
     public void testCarregaTabelaNaoLancaErro() {
         assertDoesNotThrow(() -> frm.carregaTabela());
         int linhas = frm.getTabelaEmprestimos().getRowCount();
-        assertTrue(linhas >= 0); // Pode ser 0 se não houver dados
+        assertTrue(linhas >= 0);
     }
 
     @Test
@@ -26,4 +26,16 @@ public class FrmGerenciarEmprestimoTest {
         frm.mostrarMensagem("Teste de mensagem");
         assertEquals("Teste de mensagem", frm.getUltimaMensagem());
     }
+
+    @Test
+public void testDevolucaoSemSelecaoMostraMensagemDeErro() {
+    frm.carregaTabela(); // carrega dados se houver
+    frm.getTabelaEmprestimos().clearSelection(); // garante que nada está selecionado
+
+    // Simula o clique no botão de devolução
+    assertDoesNotThrow(() -> frm.getBotaoDevolucao().doClick());
+
+    // Verifica se a mensagem correta foi exibida
+    assertEquals("Primeiro Selecione um empréstimo para DEVOLVER", frm.getUltimaMensagem());
+}
 }

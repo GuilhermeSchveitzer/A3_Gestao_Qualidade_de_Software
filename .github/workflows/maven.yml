@@ -13,7 +13,8 @@ jobs:
       name: dev
     steps:
       - name: Configura xvfb para tela 
-        run: Xvfb :1 -screen 0 1600x1200x24 & 
+        run: Xvfb :1 -screen 0 1600x1200x24 &
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -25,21 +26,22 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn -B compile --file pom.xml
-        env:
-         # Roda a aplicação a tela 1 do Xvfb
-         DISPLAY: :1
-      # Desliga o Xvfb
+        run: |
+          export DISPLAY=:1
+          mvn -B compile -Dheadless.mode=false --file pom.xml
+
       - name: Desliga Xvfb
         run: killall Xvfb
+
   build-hmg:
     runs-on: ubuntu-latest
     needs: build-dev
     environment:
       name: hmg
     steps:
-      - name: Configura xvfb para tela 0
-        run: Xvfb :1 -screen 0 1600x1200x24 & 
+      - name: Configura xvfb para tela 
+        run: Xvfb :1 -screen 0 1600x1200x24 &
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -56,27 +58,35 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          DISPLAY: :1
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=GarraOne_EmprestimoFerramentaCI
+        run: |
+          export DISPLAY=:1
+          mvn -B verify -Dheadless.mode=false \
+            org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software
+
       - name: Desliga Xvfb
         run: killall Xvfb
+
   build-prd:
     runs-on: ubuntu-latest
     needs: build-hmg
     environment:
       name: prd
     steps:
-      - name: Configura xvfb para tela 0
-        run: Xvfb :1 -screen 0 1600x1200x24 &    
+      - name: Configura xvfb para tela 
+        run: Xvfb :1 -screen 0 1600x1200x24 &
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -89,8 +99,8 @@ jobs:
 
       - name: Package project with Maven
         env:
-         DISPLAY: :1 
-        run: mvn -B package --file pom.xml
+          DISPLAY: :1
+        run: mvn -B package -Dheadless.mode=false --file pom.xml
 
       - name: Create temporary artifact folder
         run: mkdir staging
@@ -103,5 +113,6 @@ jobs:
         with:
           name: Package
           path: staging
+
       - name: Desliga Xvfb
         run: killall Xvfb

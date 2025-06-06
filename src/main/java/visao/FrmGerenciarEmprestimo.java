@@ -17,6 +17,10 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
         this.objetoEmprestimo = new Emprestimo();
         this.carregaTabela();
     }
+    
+    public void mostrarMensagem(String mensagem) {
+    JOptionPane.showMessageDialog(this, mensagem);
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -144,13 +148,13 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
 
                 if (this.objetoEmprestimo.atualizarEmprestimoBD(id, idAmigo, idFerramenta, dataEmprestimo, dataDevolucao, false)) {
 
-                    JOptionPane.showMessageDialog(rootPane, "O amigo " + objetoEmprestimo.getAmigo().carregaAmigoPorId(idAmigo).getNomeAmigo() + " devolveu a ferramenta chamada " + objetoEmprestimo.getFerramenta().carregaFerramentaPorId(idFerramenta).getNomeFerramenta());
+                    mostrarMensagem("O amigo " + objetoEmprestimo.getAmigo().carregaAmigoPorId(idAmigo).getNomeAmigo() + " devolveu a ferramenta chamada " + objetoEmprestimo.getFerramenta().carregaFerramentaPorId(idFerramenta).getNomeFerramenta());
                 }
             }
             // atualiza a tabela.
             System.out.println(this.objetoEmprestimo.getMinhaLista().toString());
         } catch (Mensagem erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
+            mostrarMensagem(erro.getMessage());
         } finally {
             // atualiza a tabela.
             carregaTabela();
@@ -184,6 +188,9 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
             
         }
     }
+    public javax.swing.JTable getTabelaEmprestimos() {
+    return this.jTable;
+}
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

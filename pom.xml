@@ -14,23 +14,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
         <sonar.organization>guilhermeschveitzer</sonar.organization>
         <sonar.host.url>https://sonarcloud.io/</sonar.host.url>
         <sonar.coverage.exclusions>**/*Principal.*,dao.SQLiteDadosBanco,dao.cliente.SQLiteClienteMetaDados</sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.9.0-M1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-suite-api</artifactId>
-            <version>1.9.0-M1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -40,6 +34,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>1.9.0-M1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- SQLite -->
+        <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0.3</version>
@@ -48,12 +50,14 @@
 
     <build>
         <plugins>
-            <!-- Plugin para gerar JAR com dependências -->
+            <!-- Plugin para empacotar com dependências -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
+                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
@@ -72,18 +76,11 @@
                 </executions>
             </plugin>
 
-            <!-- Plugin Jacoco para cobertura de testes -->
+            <!-- Jacoco para cobertura -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.8</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*Principal.*</exclude>
-                        <exclude>dao.SQLiteDadosBanco</exclude>
-                        <exclude>dao.cliente.SQLiteClienteMetaDados</exclude>
-                    </excludes>
-                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -91,3 +88,34 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*Principal.*</exclude>
+                        <exclude>dao.SQLiteDadosBanco</exclude>
+                        <exclude>dao.cliente.SQLiteClienteMetaDados</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin de testes com suporte headless -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M6</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.awt.headless>true</java.awt.headless>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

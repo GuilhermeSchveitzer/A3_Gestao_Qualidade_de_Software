@@ -39,4 +39,12 @@ public class FrmGerenciarEmprestimoTest {
 
         assertEquals("Primeiro Selecione um empréstimo para DEVOLVER", frm.getUltimaMensagem());
     }
+
+@Test
+public void testFrmGerenciarEmprestimoCarregaTabelaSemErro() {
+    FrmGerenciarEmprestimo frame = new FrmGerenciarEmprestimo();
+    frame.setVisible(false); // Garante que não abre a janela
+
+    assertDoesNotThrow(() -> frame.carregaTabela());
+}
 }

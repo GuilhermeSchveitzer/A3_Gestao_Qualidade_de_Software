@@ -1,10 +1,14 @@
 package visao;
 
 public class FrmGerenciarEmprestimoFake extends FrmGerenciarEmprestimo {
-    
+
     private String ultimaMensagem;
 
-  
+    public FrmGerenciarEmprestimoFake() {
+    inicializarEmprestimoFake(); // chama método da superclasse
+}
+
+    
 
     @Override
     public void mostrarMensagem(String mensagem) {
@@ -15,5 +19,4 @@ public class FrmGerenciarEmprestimoFake extends FrmGerenciarEmprestimo {
     public String getUltimaMensagem() {
         return ultimaMensagem;
     }
-
 }

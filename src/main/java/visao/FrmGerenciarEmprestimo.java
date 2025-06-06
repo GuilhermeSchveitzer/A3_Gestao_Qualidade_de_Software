@@ -231,6 +231,11 @@ public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
     public javax.swing.JButton getBotaoDevolucao() {
     return JBDevolucao;
 }
+    
+    protected void inicializarEmprestimoFake() {
+    this.objetoEmprestimo = new modelo.Emprestimo();
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBDevolucao;

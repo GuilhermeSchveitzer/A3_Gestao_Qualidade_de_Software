@@ -11,7 +11,10 @@ public class FrmGerenciarEmprestimoTest {
 
     @BeforeEach
     public void setUp() {
-        frm = new FrmGerenciarEmprestimoFake();
+        // ⚠️ Ativa o modo headless para ambientes como GitHub Actions
+        System.setProperty("java.awt.headless", "true");
+
+        frm = new FrmGerenciarEmprestimoFake(); // classe fake que evita abrir janelas
     }
 
     @Test
@@ -28,14 +31,12 @@ public class FrmGerenciarEmprestimoTest {
     }
 
     @Test
-public void testDevolucaoSemSelecaoMostraMensagemDeErro() {
-    frm.carregaTabela(); // carrega dados se houver
-    frm.getTabelaEmprestimos().clearSelection(); // garante que nada está selecionado
+    public void testDevolucaoSemSelecaoMostraMensagemDeErro() {
+        frm.carregaTabela();
+        frm.getTabelaEmprestimos().clearSelection();
 
-    // Simula o clique no botão de devolução
-    assertDoesNotThrow(() -> frm.getBotaoDevolucao().doClick());
+        assertDoesNotThrow(() -> frm.getBotaoDevolucao().doClick());
 
-    // Verifica se a mensagem correta foi exibida
-    assertEquals("Primeiro Selecione um empréstimo para DEVOLVER", frm.getUltimaMensagem());
-}
+        assertEquals("Primeiro Selecione um empréstimo para DEVOLVER", frm.getUltimaMensagem());
+    }
 }

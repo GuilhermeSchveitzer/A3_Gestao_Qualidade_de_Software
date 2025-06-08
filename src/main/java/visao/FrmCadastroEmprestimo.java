@@ -17,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 
-// FEITO POR JOÃO
 public class FrmCadastroEmprestimo extends javax.swing.JFrame {
 
     private Emprestimo objetoEmprestimo;
@@ -249,6 +248,28 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
         }
     }
 
+    // 🔽🔽🔽🔽🔽 ADICIONADOS PARA TESTES 🔽🔽🔽🔽🔽
+    public JTextPane getJTFData() {
+        return this.JTFData;
+    }
+
+    public JButton getJBVoltar() {
+        return this.JBVoltar;
+    }
+
+    public JButton getJBPegar() {
+        return this.JBPegar;
+    }
+
+    public JComboBox<String> getCBAmigo() {
+        return this.CBAmigo;
+    }
+
+    public JComboBox<String> getCBFerramenta() {
+        return this.CBFerramenta;
+    }
+    // 🔼🔼🔼🔼🔼 FIM DOS MÉTODOS PARA TESTES 🔼🔼🔼🔼🔼
+    
     private void CBAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBAmigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CBAmigoActionPerformed
@@ -273,5 +294,3 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
-
-

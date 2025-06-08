@@ -1,5 +1,5 @@
-
 package visao;
+
 import javax.swing.JOptionPane;
 import modelo.Ferramenta;
 
@@ -184,6 +184,28 @@ public class FrmCadastroFerramenta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
+    // 🔽 Getters públicos para testes JUnit 🔽
+public javax.swing.JTextField getJTFNomeFerramenta() {
+    return JTFNomeFerramenta;
+}
+
+public javax.swing.JTextField getJTFMarca() {
+    return JTFMarca;
+}
+
+public javax.swing.JTextField getJTFCusto() {
+    return JTFCusto;
+}
+
+public javax.swing.JButton getJBCadastrar() {
+    return JBCadastrar;
+}
+
+public javax.swing.JButton getJBVoltar() {
+    return JBVoltar;
+}
+// 🔼 Fim dos getters
+    
     private void JTFMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFMarcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFMarcaActionPerformed

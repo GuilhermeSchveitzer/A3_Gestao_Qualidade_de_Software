@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository (clone completo)
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Evita shallow clone e permite Sonar pegar histórico Git
+          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -68,13 +68,18 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build + Test + Coverage + SonarCloud
+      - name: Run tests and generate JaCoCo coverage report
+        env:
+          DISPLAY: :1
+        run: |
+          mvn -B clean verify -Dheadless.mode=false
+
+      - name: SonarCloud Analysis
         env:
           DISPLAY: :1
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn -B verify -Dheadless.mode=false \
-            org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.token=${SONAR_TOKEN} \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 

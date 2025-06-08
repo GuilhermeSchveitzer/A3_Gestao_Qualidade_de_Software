@@ -202,7 +202,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_JBGerenciarFerramentasActionPerformed
 
     private void JBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSairActionPerformed
-        // TODO add your handling code here:
+        encerrarAplicacao();
+    }
+
+    void encerrarAplicacao() {
         System.exit(0);
     }//GEN-LAST:event_JBSairActionPerformed
 
@@ -227,4 +230,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+    
+    public javax.swing.JButton getBtnCadastrarAluno() {
+        return JBcadastrarAluno;
+    }
+
+    public javax.swing.JButton getBtnSair() {
+        return JBSair;
+    }
+    
+    private boolean isInTestEnvironment() {
+        return java.lang.management.ManagementFactory.getRuntimeMXBean()
+        .getInputArguments().toString().contains("surefire");
+    }
 }

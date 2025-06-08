@@ -109,15 +109,18 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/*Principal.*</exclude>
+                                <exclude>dao.SQLiteDadosBanco</exclude>
+                                <exclude>dao.cliente.SQLiteClienteMetaDados</exclude>
+                            </excludes>
+                            <reports>
+                                <report>xml</report>
+                            </reports>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*Principal.*</exclude>
-                        <exclude>dao.SQLiteDadosBanco</exclude>
-                        <exclude>dao.cliente.SQLiteClienteMetaDados</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
 
             <!-- Plugin Surefire para rodar testes unitários -->

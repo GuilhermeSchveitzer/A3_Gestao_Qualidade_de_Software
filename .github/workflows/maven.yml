@@ -75,7 +75,8 @@ jobs:
         run: |
           mvn -B verify -Dheadless.mode=false \
             org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.token=${SONAR_TOKEN}
+            -Dsonar.token=${SONAR_TOKEN} \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       - name: Finalizar Xvfb
         run: killall Xvfb

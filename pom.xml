@@ -15,12 +15,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <headless.mode>false</headless.mode> <!-- Permite override no GitHub Actions -->
+        <headless.mode>false</headless.mode>
 
-        <!-- Sonar -->
+        <!-- SonarCloud properties -->
+        <sonar.projectKey>GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software</sonar.projectKey>
         <sonar.organization>guilhermeschveitzer</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>${env.SONAR_TOKEN}</sonar.login>
         <sonar.coverage.exclusions>**/*Principal.*,dao.SQLiteDadosBanco,dao.cliente.SQLiteClienteMetaDados</sonar.coverage.exclusions>
+        <sonar.coverage.jacoco.xmlReportPaths>target/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencies>
@@ -60,7 +63,7 @@
 
     <build>
         <plugins>
-            <!-- Montagem do JAR com dependências -->
+            <!-- JAR com dependências -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -84,7 +87,7 @@
                 </executions>
             </plugin>
 
-            <!-- Jacoco para cobertura -->
+            <!-- Jacoco com relatório XML -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -110,16 +113,20 @@
                         <exclude>dao.SQLiteDadosBanco</exclude>
                         <exclude>dao.cliente.SQLiteClienteMetaDados</exclude>
                     </excludes>
+                    <output>file</output>
+                    <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
                 </configuration>
             </plugin>
 
-            <!-- Surefire com suporte a headless configurável -->
+            <!-- Testes com suporte headless e fork controlado -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
                     <argLine>-Djava.awt.headless=${headless.mode}</argLine>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>1</forkCount>
                 </configuration>
             </plugin>
         </plugins>

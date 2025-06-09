@@ -3,9 +3,9 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software&metric=coverage)](https://sonarcloud.io/component_measures?id=GuilhermeSchveitzer_A3_Gestao_Qualidade_de_Software&metric=coverage)
 
 
-# 💻 Projeto de Empréstimo de Ferramentas – Java (1ª Fase)
+# 💻 Projeto de Empréstimo de Ferramentas – Java (3ª Fase)
 
-Este repositório contém um projeto desenvolvido na primeira fase do curso de graduação, cujo objetivo é gerenciar o **empréstimo de ferramentas** entre amigos. A aplicação foi construída com **Java**, utilizando **NetBeans** como IDE e **SQLite3** como banco de dados. O projeto está sendo evoluído para aplicar conceitos de **Clean Code** e **testes automatizados com JUnit**.
+Este repositório contém um projeto desenvolvido na primeira fase do curso de graduação, cujo objetivo é gerenciar o **empréstimo de ferramentas** entre amigos. A aplicação foi construída com **Java**, utilizando **NetBeans** como IDE e **MySQL** como banco de dados. O projeto está sendo evoluído para aplicar conceitos de **Clean Code** e **testes automatizados com JUnit**. Alterando de **MySQL** para **SQLite** e adicionando os testes necessários ao projeto.
 
 ---
 
@@ -41,7 +41,7 @@ O sistema conta com as seguintes classes principais:
 ## 🚀 Tecnologias Utilizadas
 
 - [Java](https://www.oracle.com/java/) - Versão: 21
-- [NetBeans](https://netbeans.apache.org/)
+- [NetBeans](https://netbeans.apache.org/) - Versão: 21
 - [SQLite3](https://www.sqlite.org/index.html) - Versão: 3.49.2
 - [Maven](https://maven.apache.org/)
 - [JUnit](https://junit.org/) - Versão: 5.9.0.

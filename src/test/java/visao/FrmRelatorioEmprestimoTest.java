@@ -136,7 +136,13 @@ public class FrmRelatorioEmprestimoTest {
     public void testSomaValorFerramentas() {
         FrmRelatorioEmprestimoFake frame = new FrmRelatorioEmprestimoFake();
         frame.somaValorFerramentas();
-        assertEquals("R$ 60,00", frame.getJLValorTotalFerramentas().getText());
+
+        String valorCalculado = frame.getJLValorTotalFerramentas().getText();
+
+        // Aceita "R$ 60,00" (pt-BR) ou "R$ 60.00" (en-US)
+        boolean valorCorreto = valorCalculado.equals("R$ 60,00") || valorCalculado.equals("R$ 60.00");
+
+        assertTrue(valorCorreto, "Esperado R$ 60,00 ou R$ 60.00, mas foi: " + valorCalculado);
     }
 
     @Test

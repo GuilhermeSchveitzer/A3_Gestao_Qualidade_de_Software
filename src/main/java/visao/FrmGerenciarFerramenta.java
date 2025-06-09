@@ -341,4 +341,31 @@ public class FrmGerenciarFerramenta extends javax.swing.JFrame {
     private javax.swing.JTable jTable;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+public javax.swing.JTable getTabela() {
+    return jTable;
+}
+
+public javax.swing.JTextField getJTFNome() {
+    return JTFNome;
+}
+
+public javax.swing.JTextField getJTFMarca() {
+    return JTFMarca;
+}
+
+public javax.swing.JTextField getJTFCusto() {
+    return JTFCusto;
+}
+
+public javax.swing.JButton getJBVoltar() {
+    return JBVoltar;
+}
+
+public javax.swing.JButton getJBAlterar() {
+    return JBAlterar;
+}
+
+public javax.swing.JButton getJBApagar() {
+    return JBApagar;
+}
 }

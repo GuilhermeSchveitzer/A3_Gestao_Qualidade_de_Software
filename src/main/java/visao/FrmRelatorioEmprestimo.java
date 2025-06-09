@@ -8,12 +8,46 @@ import dao.FerramentaDAO;
 import modelo.Ferramenta;
 import java.text.DecimalFormat;
 
-// FEITO POR HIAGO
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
-    private Emprestimo objetoemprestimo = new Emprestimo();
-    private AmigoDAO objetoamigoDAO = new AmigoDAO();
-    private FerramentaDAO objetoferramentaDAO = new FerramentaDAO();
+    
+    // Setters para injeção de dependência nos testes
+
+public void setObjetoEmprestimo(Emprestimo emprestimo) {
+    this.objetoEmprestimo = emprestimo;
+}
+
+public void setObjetoAmigoDAO(AmigoDAO dao) {
+    this.objetoAmigoDAO = dao;
+}
+
+public void setObjetoFerramentaDAO(FerramentaDAO dao) {
+    this.objetoFerramentaDAO = dao;
+}
+
+public void setJLValorTotalFerramentas(javax.swing.JLabel label) {
+    this.JLValorTotalFerramentas = label;
+}
+
+public void setJLAmigoMaisEmprestimos(javax.swing.JLabel label) {
+    this.JLAmigoMaisEmprestimos = label;
+}
+
+public void setJLAmigoNuncaDevolveu(javax.swing.JLabel label) {
+    this.JLAmigoNuncaDevolveu = label;
+}
+
+public void setJLIndicadorAmigoDevolver(javax.swing.JLabel label) {
+    this.JLIndicadorAmigoDevolver = label;
+}
+
+public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
+    this.JLIndicadorAmigoEmprestimos = label;
+}
+    
+    protected Emprestimo objetoEmprestimo = new Emprestimo();
+    protected AmigoDAO objetoAmigoDAO = new AmigoDAO();
+    protected FerramentaDAO objetoFerramentaDAO = new FerramentaDAO();
 
     public FrmRelatorioEmprestimo() {
         initComponents();
@@ -51,8 +85,9 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Relatorio de Emprestimos");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        JTTodosEmprestimosRealizados.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         JTTodosEmprestimosRealizados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -78,6 +113,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             JTTodosEmprestimosRealizados.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        JTEmprestimosAtivos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         JTEmprestimosAtivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -241,7 +277,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
         double valorTotal = 0;
 
-        ArrayList<Ferramenta> listaFerramenta = objetoferramentaDAO.getListaFerramenta();
+        ArrayList<Ferramenta> listaFerramenta = objetoFerramentaDAO.getListaFerramenta();
 
         for (Ferramenta a : listaFerramenta) {
             valorTotal += a.getCusto();
@@ -255,9 +291,9 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
     
     public void amigoNuncaDevolveu() {
         
-        ArrayList<Emprestimo> listaEmprestimo = objetoemprestimo.getMinhaLista();
+        ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.getMinhaLista();
 
-        int[][] valores = new int[2][objetoamigoDAO.getListaAmigo().size()];
+        int[][] valores = new int[2][objetoAmigoDAO.getListaAmigo().size()];
 
         for (Emprestimo a : listaEmprestimo) {
             boolean novoAmigo = true;
@@ -296,7 +332,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         }
 
         for (int y = 0; y < nuncaDevolvidosID.size(); y++) {
-            System.out.println((objetoamigoDAO.carregaAmigoPorId(nuncaDevolvidosID.get(y)).getNomeAmigo()));
+            System.out.println((objetoAmigoDAO.carregaAmigoPorId(nuncaDevolvidosID.get(y)).getNomeAmigo()));
         }
         
         if (nuncaDevolvidosID.size() > 1) {
@@ -316,7 +352,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             int limite = nuncaDevolvidosID.size();
             //if (limite > 3) {limite = 3;}
             for (int y = 0; y < limite; y++) {
-                str.append(objetoamigoDAO.carregaAmigoPorId(nuncaDevolvidosID.get(y)).getNomeAmigo());
+                str.append(objetoAmigoDAO.carregaAmigoPorId(nuncaDevolvidosID.get(y)).getNomeAmigo());
                 if (y < limite - 1) {
                     str.append(", ");
                 }
@@ -327,20 +363,12 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         }
         
     }
-
-    //código absolutamente RADIOATIVO abaixo, não tente entender ele
-    
-    //isso aconteceu porque tiraram os valores de quantidade de empréstimo do amigo
-    //e não colocaram checagem dinâmicas, então eu tive que enfiar o equivalente
-    //a uns 3 métodos diferentes em 1 só
-    
-    //dado mais tempo eu tentarra fazer uma coisa de gente sã, mas não tem tempo
     
     public void amigoMaisEmprestimos() {
 
-        ArrayList<Emprestimo> listaEmprestimo = objetoemprestimo.getMinhaLista();
+        ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.getMinhaLista();
 
-        int[][] valores = new int[2][objetoamigoDAO.getListaAmigo().size()];
+        int[][] valores = new int[2][objetoAmigoDAO.getListaAmigo().size()];
 
         for (Emprestimo a : listaEmprestimo) {
             boolean novoAmigo = true;
@@ -384,7 +412,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         }
 
         for (int y = 0; y < maioresEmprestadosID.size(); y++) {
-            System.out.println((objetoamigoDAO.carregaAmigoPorId(maioresEmprestadosID.get(y)).getNomeAmigo()));
+            System.out.println((objetoAmigoDAO.carregaAmigoPorId(maioresEmprestadosID.get(y)).getNomeAmigo()));
         }
         
         if (maioresEmprestadosID.size() > 1) {
@@ -402,7 +430,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             int limite = maioresEmprestadosID.size();
             if (limite > 3) {limite = 3;}
             for (int y = 0; y < limite; y++) {
-                str.append(objetoamigoDAO.carregaAmigoPorId(maioresEmprestadosID.get(y)).getNomeAmigo());
+                str.append(objetoAmigoDAO.carregaAmigoPorId(maioresEmprestadosID.get(y)).getNomeAmigo());
                 if (y < limite - 1) {
                     str.append(", ");
                 }
@@ -418,7 +446,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.JTTodosEmprestimosRealizados.getModel();
         modelo.setNumRows(0); // Posiciona na primeira linha da tabela
         // Carrega a lista de objetos ferramenta
-        ArrayList<Emprestimo> listaEmprestimo = objetoemprestimo.getMinhaLista();
+        ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.getMinhaLista();
 
         for (Emprestimo a : listaEmprestimo) {
 
@@ -428,10 +456,10 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             }
 
             modelo.addRow(new Object[]{
-                objetoferramentaDAO.carregaFerramentaPorId(a.getIdFerramenta()).getNomeFerramenta(),
+                objetoFerramentaDAO.carregaFerramentaPorId(a.getIdFerramenta()).getNomeFerramenta(),
                 a.getDataEmprestimo(),
                 a.getDataDevolucao(),
-                objetoamigoDAO.carregaAmigoPorId(a.getIdAmigo()).getNomeAmigo(),});
+                objetoAmigoDAO.carregaAmigoPorId(a.getIdAmigo()).getNomeAmigo(),});
         }
     }
 
@@ -439,7 +467,7 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.JTEmprestimosAtivos.getModel();
         modelo.setNumRows(0); // Posiciona na primeira linha da tabela
         // Carrega a lista de objetos ferramenta
-        ArrayList<Emprestimo> listaEmprestimo = objetoemprestimo.getMinhaLista();
+        ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.getMinhaLista();
 
         for (Emprestimo a : listaEmprestimo) {
 
@@ -449,21 +477,21 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
             }
 
             modelo.addRow(new Object[]{
-                objetoferramentaDAO.carregaFerramentaPorId(a.getIdFerramenta()).getNomeFerramenta(),
+                objetoFerramentaDAO.carregaFerramentaPorId(a.getIdFerramenta()).getNomeFerramenta(),
                 a.getDataEmprestimo(),
-                objetoamigoDAO.carregaAmigoPorId(a.getIdAmigo()).getNomeAmigo(),});
+                objetoAmigoDAO.carregaAmigoPorId(a.getIdAmigo()).getNomeAmigo(),});
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBVoltar;
-    private javax.swing.JLabel JLAmigoMaisEmprestimos;
-    private javax.swing.JLabel JLAmigoNuncaDevolveu;
-    private javax.swing.JLabel JLIndicadorAmigoDevolver;
-    private javax.swing.JLabel JLIndicadorAmigoEmprestimos;
-    private javax.swing.JLabel JLValorTotalFerramentas;
-    private javax.swing.JTable JTEmprestimosAtivos;
-    private javax.swing.JTable JTTodosEmprestimosRealizados;
+    protected javax.swing.JLabel JLAmigoMaisEmprestimos;
+    protected javax.swing.JLabel JLAmigoNuncaDevolveu;
+    protected javax.swing.JLabel JLIndicadorAmigoDevolver;
+    protected javax.swing.JLabel JLIndicadorAmigoEmprestimos;
+    protected javax.swing.JLabel JLValorTotalFerramentas;
+    protected javax.swing.JTable JTEmprestimosAtivos;
+    protected javax.swing.JTable JTTodosEmprestimosRealizados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

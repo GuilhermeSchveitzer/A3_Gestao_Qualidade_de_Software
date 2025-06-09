@@ -1,4 +1,3 @@
-
 package visao;
 
 
@@ -205,7 +204,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         encerrarAplicacao();
     }
 
-    void encerrarAplicacao() {
+    protected void encerrarAplicacao() {
         System.exit(0);
     }//GEN-LAST:event_JBSairActionPerformed
 

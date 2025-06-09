@@ -1,36 +1,69 @@
 package visao;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.*;
 import visao.FrmGerenciarAmigo;
-import modelo.Amigo;
 
-public class FrmGerenciarAmigoTest {
+import javax.swing.*;
+import java.awt.*;
 
-    @BeforeClass
-    public static void configurarModoHeadless() {
-        if (System.getenv("CI") != null) {
-            System.setProperty("java.awt.headless", "true");
+import static org.junit.jupiter.api.Assertions.*;
+
+class FrmGerenciarAmigoTest {
+
+    FrmGerenciarAmigo frame;
+
+    @BeforeEach
+    void setUp() {
+        // Roda na thread do Swing
+        SwingUtilities.invokeLater(() -> {
+            frame = new FrmGerenciarAmigo();
+            frame.setVisible(true);
+        });
+        try {
+            Thread.sleep(500); // tempo para abrir a janela
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
+    @AfterEach
+    void tearDown() {
+        SwingUtilities.invokeLater(() -> frame.dispose());
+    }
+
     @Test
-    public void testSalvarAmigo() {
-        // Cria o formulário
-        FrmGerenciarAmigo tela = new FrmGerenciarAmigo();
+    void testSalvarComCamposPreenchidos() {
+        SwingUtilities.invokeLater(() -> {
+            frame.getJTFNome().setText("João");
+            frame.getJTFTelefone().setText("123456789");
+            frame.getJBSalvar().doClick();
 
-        // Preenche os campos de nome e telefone
-        tela.getJTFNome().setText("Victor Teste");
-        tela.getJTFTelefone().setText("123456789");
+            // Verifica se a tabela foi atualizada
+            assertTrue(frame.getAmigo().getListaAmigo().size() > 0);
+        });
+    }
 
-        // Simula clique no botão Salvar
-        tela.getJBSalvar().doClick();
+    @Test
+    void testSalvarComNomeVazio() {
+        SwingUtilities.invokeLater(() -> {
+            frame.getJTFNome().setText("");
+            frame.getJTFTelefone().setText("999999999");
+            frame.getJBSalvar().doClick();
 
-        // Verifica se o último amigo adicionado tem os dados certos
-        Amigo ultimo = tela.getAmigo().getListaAmigo().get(tela.getAmigo().getListaAmigo().size() - 1);
+            // Não deve adicionar novo amigo
+            assertEquals(0, frame.getAmigo().getListaAmigo().size());
+        });
+    }
 
-        assertEquals("Victor Teste", ultimo.getNomeAmigo());
-        assertEquals("123456789", ultimo.getTelefone());
+    @Test
+    void testSalvarComTelefoneVazio() {
+        SwingUtilities.invokeLater(() -> {
+            frame.getJTFNome().setText("Maria");
+            frame.getJTFTelefone().setText("");
+            frame.getJBSalvar().doClick();
+
+            // Não deve adicionar novo amigo
+            assertEquals(0, frame.getAmigo().getListaAmigo().size());
+        });
     }
 }

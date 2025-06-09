@@ -1,6 +1,4 @@
-
 package visao;
-
 
 import dao.AmigoDAO;
 import java.util.ArrayList;
@@ -8,10 +6,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 
-
 public class FrmGerenciarAmigo extends javax.swing.JFrame {
 
-     private Amigo amigo;
+    private Amigo amigo;
 
     public FrmGerenciarAmigo() {
         initComponents();
@@ -19,8 +16,6 @@ public class FrmGerenciarAmigo extends javax.swing.JFrame {
         this.carregaTabela();
     }
 
-
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -174,10 +169,9 @@ public class FrmGerenciarAmigo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
- 
 
     private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
-    try {
+        try {
             if (this.jTable.getSelectedRow() == -1) {
                 throw new Exception("Primeiro Selecione um Amigo para APAGAR");
             }
@@ -203,8 +197,8 @@ public class FrmGerenciarAmigo extends javax.swing.JFrame {
     }//GEN-LAST:event_JBApagarActionPerformed
 
     private void JBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAlterarActionPerformed
-  // TODO add your handling code here:
-     try {
+        // TODO add your handling code here:
+        try {
             String nome = "";
             String telefone = "";
 
@@ -235,16 +229,16 @@ public class FrmGerenciarAmigo extends javax.swing.JFrame {
         } finally {
             carregaTabela();
         }
-    
+
     }//GEN-LAST:event_JBAlterarActionPerformed
 
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
-     this.dispose();
+        this.dispose();
 
     }//GEN-LAST:event_JBVoltarActionPerformed
 
     private void JBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSalvarActionPerformed
-       try {
+        try {
             String nome = "";
             String telefone = "";
 
@@ -293,7 +287,6 @@ public class FrmGerenciarAmigo extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFNomeActionPerformed
     // TODO add your handling code here:
 
-
     public void carregaTabela() {
 
         DefaultTableModel modelo = (DefaultTableModel) this.jTable.getModel();
@@ -341,6 +334,22 @@ public class FrmGerenciarAmigo extends javax.swing.JFrame {
                 new FrmGerenciarAmigo().setVisible(true);
             }
         });
+    }
+
+    public javax.swing.JTextField getJTFNome() {
+        return JTFNome;
+    }
+
+    public javax.swing.JTextField getJTFTelefone() {
+        return JTFTelefone;
+    }
+
+    public javax.swing.JButton getJBSalvar() {
+        return JBSalvar;
+    }
+
+    public Amigo getAmigo() {
+        return amigo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,19 +1,21 @@
-import static org.junit.Assert.*;
-import org.junit.Test;
+package visao;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 import visao.FrmRelatorioEmprestimo;
 import modelo.Emprestimo;
 import dao.AmigoDAO;
 import dao.FerramentaDAO;
 import modelo.Amigo;
 import modelo.Ferramenta;
-import fakes.FrmRelatorioEmprestimoFake;
 
 import java.util.ArrayList;
 import javax.swing.JLabel;
 
 public class FrmRelatorioEmprestimoTest {
 
-    class FakeAmigoDAO extends AmigoDAO {
+    static class FakeAmigoDAO extends AmigoDAO {
         @Override
         public ArrayList<Amigo> getListaAmigo() {
             ArrayList<Amigo> lista = new ArrayList<>();
@@ -35,7 +37,7 @@ public class FrmRelatorioEmprestimoTest {
         }
     }
 
-    class FakeFerramentaDAO extends FerramentaDAO {
+    static class FakeFerramentaDAO extends FerramentaDAO {
         @Override
         public ArrayList<Ferramenta> getListaFerramenta() {
             ArrayList<Ferramenta> lista = new ArrayList<>();
@@ -59,7 +61,7 @@ public class FrmRelatorioEmprestimoTest {
         }
     }
 
-    class FakeEmprestimo extends Emprestimo {
+    static class FakeEmprestimo extends Emprestimo {
         @Override
         public ArrayList<Emprestimo> getMinhaLista() {
             ArrayList<Emprestimo> lista = new ArrayList<>();
@@ -88,7 +90,7 @@ public class FrmRelatorioEmprestimoTest {
         }
     }
 
-    class FrmRelatorioEmprestimoFake extends FrmRelatorioEmprestimo {
+    static class FrmRelatorioEmprestimoFake extends FrmRelatorioEmprestimo {
         public FrmRelatorioEmprestimoFake() {
             super();
             this.objetoAmigoDAO = new FakeAmigoDAO();

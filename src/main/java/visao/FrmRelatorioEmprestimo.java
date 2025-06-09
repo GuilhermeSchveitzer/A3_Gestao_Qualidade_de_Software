@@ -10,41 +10,39 @@ import java.text.DecimalFormat;
 
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
-    
     // Setters para injeção de dependência nos testes
+    public void setObjetoEmprestimo(Emprestimo emprestimo) {
+        this.objetoEmprestimo = emprestimo;
+    }
 
-public void setObjetoEmprestimo(Emprestimo emprestimo) {
-    this.objetoEmprestimo = emprestimo;
-}
+    public void setObjetoAmigoDAO(AmigoDAO dao) {
+        this.objetoAmigoDAO = dao;
+    }
 
-public void setObjetoAmigoDAO(AmigoDAO dao) {
-    this.objetoAmigoDAO = dao;
-}
+    public void setObjetoFerramentaDAO(FerramentaDAO dao) {
+        this.objetoFerramentaDAO = dao;
+    }
 
-public void setObjetoFerramentaDAO(FerramentaDAO dao) {
-    this.objetoFerramentaDAO = dao;
-}
+    public void setJLValorTotalFerramentas(javax.swing.JLabel label) {
+        this.JLValorTotalFerramentas = label;
+    }
 
-public void setJLValorTotalFerramentas(javax.swing.JLabel label) {
-    this.JLValorTotalFerramentas = label;
-}
+    public void setJLAmigoMaisEmprestimos(javax.swing.JLabel label) {
+        this.JLAmigoMaisEmprestimos = label;
+    }
 
-public void setJLAmigoMaisEmprestimos(javax.swing.JLabel label) {
-    this.JLAmigoMaisEmprestimos = label;
-}
+    public void setJLAmigoNuncaDevolveu(javax.swing.JLabel label) {
+        this.JLAmigoNuncaDevolveu = label;
+    }
 
-public void setJLAmigoNuncaDevolveu(javax.swing.JLabel label) {
-    this.JLAmigoNuncaDevolveu = label;
-}
+    public void setJLIndicadorAmigoDevolver(javax.swing.JLabel label) {
+        this.JLIndicadorAmigoDevolver = label;
+    }
 
-public void setJLIndicadorAmigoDevolver(javax.swing.JLabel label) {
-    this.JLIndicadorAmigoDevolver = label;
-}
+    public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
+        this.JLIndicadorAmigoEmprestimos = label;
+    }
 
-public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
-    this.JLIndicadorAmigoEmprestimos = label;
-}
-    
     protected Emprestimo objetoEmprestimo = new Emprestimo();
     protected AmigoDAO objetoAmigoDAO = new AmigoDAO();
     protected FerramentaDAO objetoFerramentaDAO = new FerramentaDAO();
@@ -271,10 +269,7 @@ public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
         });
     }
 
-    //possivelmente poderia ser criado um método na classe de ferramenta
-    //mas por ora vou deixar assim
     public void somaValorFerramentas() {
-
         double valorTotal = 0;
 
         ArrayList<Ferramenta> listaFerramenta = objetoFerramentaDAO.getListaFerramenta();
@@ -282,15 +277,15 @@ public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
         for (Ferramenta a : listaFerramenta) {
             valorTotal += a.getCusto();
         }
-        
+
         DecimalFormat form = new DecimalFormat("0.00");
 
         this.JLValorTotalFerramentas.setText("R$ " + form.format(valorTotal));
 
     }
-    
+
     public void amigoNuncaDevolveu() {
-        
+
         ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.getMinhaLista();
 
         int[][] valores = new int[2][objetoAmigoDAO.getListaAmigo().size()];
@@ -324,7 +319,7 @@ public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
         }
 
         ArrayList<Integer> nuncaDevolvidosID = new ArrayList<>();
-        
+
         for (int i = 0; i < valores[1].length; i++) {
             if (valores[1][i] == 2) {
                 nuncaDevolvidosID.add(valores[0][i]);
@@ -334,19 +329,19 @@ public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
         for (int y = 0; y < nuncaDevolvidosID.size(); y++) {
             System.out.println((objetoAmigoDAO.carregaAmigoPorId(nuncaDevolvidosID.get(y)).getNomeAmigo()));
         }
-        
+
         if (nuncaDevolvidosID.size() > 1) {
             this.JLIndicadorAmigoDevolver.setText("Amigos que nunca devolveram:");
         } else {
             this.JLIndicadorAmigoDevolver.setText("Amigo que nunca devolveu:");
         }
-        
+
         if (nuncaDevolvidosID.size() > 5) {
             this.JLAmigoNuncaDevolveu.setText("Empate");
-        } else if (nuncaDevolvidosID.isEmpty()){
+        } else if (nuncaDevolvidosID.isEmpty()) {
             this.JLAmigoNuncaDevolveu.setText("Nenhum");
         } else {
-        
+
             StringBuilder str = new StringBuilder();
 
             int limite = nuncaDevolvidosID.size();
@@ -359,11 +354,11 @@ public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
             }
 
             this.JLAmigoNuncaDevolveu.setText(str.toString());
-            
+
         }
-        
+
     }
-    
+
     public void amigoMaisEmprestimos() {
 
         ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.getMinhaLista();
@@ -414,21 +409,23 @@ public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
         for (int y = 0; y < maioresEmprestadosID.size(); y++) {
             System.out.println((objetoAmigoDAO.carregaAmigoPorId(maioresEmprestadosID.get(y)).getNomeAmigo()));
         }
-        
+
         if (maioresEmprestadosID.size() > 1) {
             this.JLIndicadorAmigoEmprestimos.setText("Amigos com mais empréstimos:");
         } else {
             this.JLIndicadorAmigoEmprestimos.setText("Amigo com mais empréstimos");
         }
-        
+
         if (maioresEmprestadosID.size() > 5) {
             this.JLAmigoMaisEmprestimos.setText("Empate");
         } else {
-        
+
             StringBuilder str = new StringBuilder();
 
             int limite = maioresEmprestadosID.size();
-            if (limite > 3) {limite = 3;}
+            if (limite > 3) {
+                limite = 3;
+            }
             for (int y = 0; y < limite; y++) {
                 str.append(objetoAmigoDAO.carregaAmigoPorId(maioresEmprestadosID.get(y)).getNomeAmigo());
                 if (y < limite - 1) {
@@ -437,7 +434,7 @@ public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
             }
 
             this.JLAmigoMaisEmprestimos.setText(str.toString());
-            
+
         }
 
     }
@@ -482,7 +479,6 @@ public void setJLIndicadorAmigoEmprestimos(javax.swing.JLabel label) {
                 objetoAmigoDAO.carregaAmigoPorId(a.getIdAmigo()).getNomeAmigo(),});
         }
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBVoltar;
     protected javax.swing.JLabel JLAmigoMaisEmprestimos;

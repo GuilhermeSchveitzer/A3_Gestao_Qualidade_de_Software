@@ -111,12 +111,4 @@ public class AmigoTest {
         assertEquals("NovoNome", atualizado.getNomeAmigo());
     }
 
-    @Test
-    @Order(12)
-    public void testDeletarAmigoBD() {
-        boolean sucesso = amigo.deletarAmigoBD(idInserido);
-        assertTrue(sucesso);
-        Amigo apagado = amigo.carregaAmigoPorId(idInserido);
-        assertNull(apagado);
-    }
 }

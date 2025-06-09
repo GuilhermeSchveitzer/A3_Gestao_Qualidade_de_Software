@@ -12,10 +12,20 @@ import modelo.Ferramenta;
 
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import org.junit.jupiter.api.BeforeAll;
 
 public class FrmRelatorioEmprestimoTest {
 
+    // ✅ Adicionado para rodar corretamente no ambiente CI (como GitHub Actions)
+    @BeforeAll
+    public static void configurarModoHeadless() {
+        if (System.getenv("CI") != null) {
+            System.setProperty("java.awt.headless", "true");
+        }
+    }
+
     static class FakeAmigoDAO extends AmigoDAO {
+
         @Override
         public ArrayList<Amigo> getListaAmigo() {
             ArrayList<Amigo> lista = new ArrayList<>();
@@ -38,6 +48,7 @@ public class FrmRelatorioEmprestimoTest {
     }
 
     static class FakeFerramentaDAO extends FerramentaDAO {
+
         @Override
         public ArrayList<Ferramenta> getListaFerramenta() {
             ArrayList<Ferramenta> lista = new ArrayList<>();
@@ -62,6 +73,7 @@ public class FrmRelatorioEmprestimoTest {
     }
 
     static class FakeEmprestimo extends Emprestimo {
+
         @Override
         public ArrayList<Emprestimo> getMinhaLista() {
             ArrayList<Emprestimo> lista = new ArrayList<>();
@@ -91,6 +103,7 @@ public class FrmRelatorioEmprestimoTest {
     }
 
     static class FrmRelatorioEmprestimoFake extends FrmRelatorioEmprestimo {
+
         public FrmRelatorioEmprestimoFake() {
             super();
             this.objetoAmigoDAO = new FakeAmigoDAO();

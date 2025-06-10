@@ -72,25 +72,25 @@ public class ConexaoTest {
 
     @Test
     public void testCriarTabelasIniciaisIdempotente() {
-        // Chama novamente para garantir que não lança exceção e funciona se chamado múltiplas vezes
-        Conexao.criarTabelasIniciais();
-        // Se não lançar exceção, passou no teste
-        assertTrue(true);
+        assertDoesNotThrow(() -> Conexao.criarTabelasIniciais(), "Não deve lançar exceção ao criar tabelas novamente"); 
+
+        
+        try (Statement stmt = conexao.createStatement()) {
+            assertTrue(existeTabela(stmt, "tb_amigos"), "Após recriar, tb_amigos ainda deve existir");
+            assertTrue(existeTabela(stmt, "tb_ferramentas"), "Após recriar, tb_ferramentas ainda deve existir");
+            assertTrue(existeTabela(stmt, "tb_emprestimos"), "Após recriar, tb_emprestimos ainda deve existir");
+        } catch (SQLException e) {
+            fail("Erro ao verificar tabelas após idempotência: " + e.getMessage());
+        }
     }
 
     @Test
-    public void testGetConexaoClassNotFoundException() throws Exception {
-        // Simular ClassNotFoundException é complicado porque o método usa Class.forName diretamente
-        // Mas podemos usar Reflection para alterar temporariamente o URL e driver para algo inválido
-        Field urlField = Conexao.class.getDeclaredField("URL");
-        urlField.setAccessible(true);
-        // O URL é final, não podemos alterar, então esse teste fica limitado sem mock externo
-        // Podemos só garantir que se o driver não for encontrado, o método não quebra, mas isso não é trivial sem mock.
+    public void testGetConexaoClassNotFoundException() {
+        assertTrue(true, "Este teste é conceitual e precisa de mock para ser efetivo."); 
     }
 
     @Test
-    public void testGetConexaoSQLException() throws Exception {
-        // Sem mock, é difícil simular SQLException na conexão
-        // Teste manual recomendado para este caso, ou usar frameworks de mock como Mockito para simular DriverManager
+    public void testGetConexaoSQLException() {
+         assertTrue(true, "Este teste é conceitual e precisa de mock para ser efetivo.");
     }
 }

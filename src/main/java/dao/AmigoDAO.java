@@ -17,9 +17,9 @@ public class AmigoDAO {
     public ArrayList<Amigo> getListaAmigo() {
         listaAmigo.clear();
 
-        // Usando try-with-resources para garantir o fechamento de Statement e ResultSet
-        try (Statement stmt = Conexao.getConexao().createStatement();
-             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos")) {
+        // usando o bloco try catch para tratar possíveis erros
+        try (Statement stmt = Conexao.getConexao().createStatement(); // Linha 23: Corrigido com try-with-resources
+             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos")) { // ResultSet também no try-with-resources
 
             // loop para percorrer todas as linhas da tabela
             while (res.next()) {
@@ -32,6 +32,7 @@ public class AmigoDAO {
                 listaAmigo.add(objeto);
             }
         } catch (SQLException e) {
+            // printando o erro específico no console
             e.printStackTrace();
             return null;
         }
@@ -43,16 +44,12 @@ public class AmigoDAO {
         Amigo objeto = new Amigo();
         objeto.setIdAmigo(id);
 
-        // **CORREÇÃO:** Usando PreparedStatement para evitar Injeção de SQL
-        String sql = "SELECT * FROM tb_amigos WHERE idAmigo = ?";
-        try (PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql)) {
-            stmt.setInt(1, id); // Define o parâmetro de forma segura
-
-            try (ResultSet res = stmt.executeQuery()) { // Executa a query sem concatenar
-                if (res.next()) { // Adicionado verificação para garantir que há um resultado
-                    objeto.setNomeAmigo(res.getString("nomeAmigo"));
-                    objeto.setTelefone(res.getString("telefone"));
-                }
+        // usando o bloco try catch para tratar possíveis erros
+        try (Statement stmt = Conexao.getConexao().createStatement(); // Linha 57 (aproximada): Corrigido com try-with-resources
+             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos WHERE idAmigo = " + id)) { // ResultSet também no try-with-resources
+            if (res.next()) { // Adicionado verificação para garantir que há um resultado
+                objeto.setNomeAmigo(res.getString("nomeAmigo"));
+                objeto.setTelefone(res.getString("telefone"));
             }
         } catch (SQLException e) {
             System.out.println("Erro: " + e);
@@ -66,8 +63,8 @@ public class AmigoDAO {
         // variável para guardar o comando SQL a ser executado pelo método
         String sql = "INSERT INTO tb_amigos(idAmigo, nomeAmigo, telefone) VALUES (?,?,?)";
 
-        // Usando try-with-resources para PreparedStatement
-        try (PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql)) {
+        // usando o bloco try catch para tratar possíveis erros
+        try (PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql)) { // Corrigido com try-with-resources
             stmt.setInt(1, objeto.getIdAmigo());
             stmt.setString(2, objeto.getNomeAmigo());
             stmt.setString(3, objeto.getTelefone());
@@ -85,13 +82,10 @@ public class AmigoDAO {
     public int maiorID() {
         int maiorID = 0;
 
-        // **CORREÇÃO:** Embora esta query não receba input externo, usar Statement é aceitável,
-        // mas se a regra do Sonar estiver muito estrita, o ideal seria PreparedStatement sempre
-        // que houver chance de mudar a query. Para este caso, está OK, pois a query é estática.
-        try (Statement stmt = Conexao.getConexao().createStatement();
-             ResultSet res = stmt.executeQuery("SELECT MAX(idAmigo) idAmigo FROM tb_amigos")) {
+        try (Statement stmt = Conexao.getConexao().createStatement(); // Corrigido com try-with-resources
+             ResultSet res = stmt.executeQuery("SELECT MAX(idAmigo) idAmigo FROM tb_amigos")) { // ResultSet também no try-with-resources
 
-            if (res.next()) {
+            if (res.next()) { // Adicionado verificação para garantir que há um resultado
                 maiorID = res.getInt("idAmigo");
             }
         } catch (SQLException e) {
@@ -103,12 +97,8 @@ public class AmigoDAO {
 
     //Método para deletar amigo da BD
     public boolean deletarAmigoBD(int idAmigo) {
-        // **CORREÇÃO:** Usando PreparedStatement para evitar Injeção de SQL
-        String sql = "DELETE FROM tb_amigos WHERE idAmigo = ?";
-        try (PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql)) {
-            stmt.setInt(1, idAmigo); // Define o parâmetro de forma segura
-            stmt.executeUpdate(); // Usa executeUpdate para DELETE
-
+        try (Statement stmt = Conexao.getConexao().createStatement()) { // Linha 105 (aproximada): Corrigido com try-with-resources
+            stmt.executeUpdate("DELETE FROM tb_amigos WHERE idAmigo = " + idAmigo);
             return true;
 
         } catch (SQLException e) {
@@ -119,14 +109,13 @@ public class AmigoDAO {
 
     // método para alterar dados de algum amigo
     public boolean atualizarAmigoBD(Amigo objeto) {
-        String sql = "UPDATE tb_amigos set nomeAmigo = ? ,telefone = ? WHERE idAmigo = ?";
+        String sql = "UPDATE tb_amigos set nomeAmigo = ? ,telefone = ? WHERE idAmigo = ?"; // script SQL a ser executado
 
-        // Usando try-with-resources para PreparedStatement
-        try (PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql)) {
+        try (PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql)) { // Corrigido com try-with-resources
             stmt.setString(1, objeto.getNomeAmigo());
             stmt.setString(2, objeto.getTelefone());
             stmt.setInt(3, objeto.getIdAmigo());
-            stmt.execute();
+            stmt.execute(); // Executando a operação
 
             return true;
 
@@ -141,19 +130,17 @@ public class AmigoDAO {
         String sql = "SELECT COUNT(*) FROM tb_emprestimos e "
                 + "JOIN tb_amigos a ON e.idAmigo = a.idAmigo "
                 + "WHERE a.idAmigo = ?";
-        // Este método já estava usando PreparedStatement corretamente.
-        try (PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql)) {
+        try (PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) { // ExecuteQuery movido para dentro do try-with-resources para fechar rs automaticamente
             stmt.setInt(1, id); // O parâmetro deve ser setado antes de executar a query
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next() && rs.getInt(1) > 0) {
-                    return true;
-                }
+            if (rs.next() && rs.getInt(1) > 0) {
+                return true; // Possui empréstimo pendente
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return false; // Não possui empréstimo pendente
     }
 }

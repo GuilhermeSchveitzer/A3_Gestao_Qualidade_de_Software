@@ -91,7 +91,6 @@ class EmprestimoTest {
         Emprestimo e = new Emprestimo();
         ArrayList<Emprestimo> lista = e.getMinhaLista();
         assertNotNull(lista);
-        // Opcional: assertFalse(lista.isEmpty());
     }
 
     @Test

@@ -7,7 +7,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Emprestimo;
 
-// FEITO POR JOÃO
 public class FrmGerenciarEmprestimo extends javax.swing.JFrame {
 
     private Emprestimo objetoEmprestimo;

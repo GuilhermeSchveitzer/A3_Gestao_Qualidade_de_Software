@@ -4,11 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date; // Esta importação não está sendo usada, pode ser removida se não houver uso futuro
 import modelo.Emprestimo;
 import conexao.Conexao;
 
-// FEITO POR JOÃO
 public class EmprestimoDAO {
     public static ArrayList<Emprestimo> minhaLista = new ArrayList<>();
 

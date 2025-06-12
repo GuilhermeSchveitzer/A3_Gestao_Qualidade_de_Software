@@ -2,8 +2,6 @@ package modelo;
 
 import java.util.ArrayList;
 import dao.EmprestimoDAO;
-import java.util.Date;
-
 
 public class Emprestimo {
   private int idEmprestimo;

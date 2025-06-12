@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import modelo.Ferramenta;
 import conexao.Conexao;
 
-// FEITO POR JOÃO
 public class FerramentaDAO {
 
     public static ArrayList<Ferramenta> listaFerramenta = new ArrayList<>();

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import modelo.Amigo;
 import conexao.Conexao;
 
-// FEITO POR JOÃO
 public class AmigoDAO {
 
     public static ArrayList<Amigo> listaAmigo = new ArrayList<>();

@@ -446,8 +446,6 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.getMinhaLista();
 
         for (Emprestimo a : listaEmprestimo) {
-
-            //deselegante, mas vai segurar as pontas até eu arrumar
             if (a.getPendente() == true) {
                 continue;
             }
@@ -467,8 +465,6 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         ArrayList<Emprestimo> listaEmprestimo = objetoEmprestimo.getMinhaLista();
 
         for (Emprestimo a : listaEmprestimo) {
-
-            //mesmo de cima: feio, mas funciona até eu arrumar
             if (a.getPendente() == false) {
                 continue;
             }
